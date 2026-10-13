@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainByte - Coding Challenge</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<section id="welcome-screen" class="screen">
+    <div class="menu-layout">
+        <aside class="menu-sidebar">
+            <div class="brand-card">
+                <div class="brain-icon">🧠</div>
+                <h1>BRAINBYTE</h1>
+                <p>CODING CHALLENGE</p>
+            </div>
+
+            <div class="welcome-user">
+                <span>WELCOME, CODER!</span>
+                <strong id="current-user-name">Dante</strong>
+            </div>
+
+            <div class="menu-buttons">
+                <button id="start-game-button">▶ START GAME</button>
+                <button id="new-game-button">✦ NEW GAME</button>
+                <button id="options-button">⚙ OPTIONS</button>
+                <button id="about-button">ℹ ABOUT</button>
+                <button id="how-to-play-button">❓ HOW TO PLAY</button>
+                <button id="exit-button" class="danger-button">✕ EXIT</button>
+            </div>
+        </aside>
+
+        <section class="main-design">
+            <div class="main-design-label">MAIN DESIGN</div>
+            <div class="main-design-content">
+                <div class="hero-brain">🧠</div>
+                <h2>DEBUG. THINK. SOLVE.</h2>
+                <p>Find the broken line, fix your logic, and climb through the coding challenges.</p>
+                <div class="design-grid">
+                    <span>01</span><span>02</span><span>03</span><span>04</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<main id="game-container" class="screen hidden">
+    <div class="game-wrapper">
+        <header class="game-header">
+            <div class="game-brand">
+                <strong>BRAINBYTE</strong>
+                <span>CODING CHALLENGE</span>
+            </div>
+            <div class="header-player">
+                <span>CODER</span>
+                <strong id="game-user-name">Dante</strong>
+            </div>
+            <div class="header-level">
+                <span>LEVEL</span>
+                <strong id="level">1</strong>
+            </div>
+            <div class="header-difficulty">
+                <span>DIFFICULTY</span>
+                <strong id="difficulty">EASY</strong>
+            </div>
+            <div class="header-language">
+                <span>LANGUAGE</span>
+                <strong id="language">JavaScript</strong>
+            </div>
+            <div class="header-time">
+                <span>TIME</span>
+                <strong id="timer">60</strong>
+            </div>
+            <div class="header-lives">
+                <span>LIVES</span>
+                <strong id="lives-display">❤️ ❤️ ❤️</strong>
+            </div>
+            <button id="pause-button" class="pause-button">Ⅱ PAUSE</button>
+        </header>
+
+        <section class="score-bar">
+            <div><span>SCORE</span><strong id="score">0</strong></div>
+            <div><span>STREAK</span><strong id="streak">0</strong></div>
+            <div><span>BEST</span><strong id="best-score">0</strong></div>
+            <div><span>BUGS FOUND</span><strong id="bugs-found">0 / 3</strong></div>
+        </section>
+
+        <section class="progress-section">
+            <div class="progress-info">
+                <span>LEVEL <strong id="progress-level">1</strong> / <strong id="total-levels">10</strong></span>
+                <span id="progress-percent">10%</span>
+            </div>
+            <div class="progress-bar"><div id="progress-fill"></div></div>
+        </section>
+
+        <section class="coding-area">
+            <div class="code-panel reference-panel">
+                <div class="code-panel-header">
+                    <div><span class="panel-icon">✓</span><strong>REFERENCE CODE</strong></div>
+                    <span class="panel-language" id="reference-language">CORRECT</span>
+                </div>
+                <div id="correct-code" class="code-editor reference-code"></div>
+            </div>
+
+            <div class="code-panel debugging-panel">
+                <div class="code-panel-header">
+                    <div><span class="panel-icon">⚠</span><strong>DEBUGGING CODE</strong></div>
+                    <span class="panel-language">CLICK THE BUG</span>
+                </div>
+                <div id="challenge-code" class="code-editor challenge-code"></div>
+            </div>
+        </section>
+
+        <section class="debug-instruction">
+            <div class="instruction-icon">🐞</div>
+            <div class="instruction-text">
+                <strong>FIND THE BUG</strong>
+                <span>Click the line or lines in the Debugging Code that contain the error.</span>
+            </div>
+        </section>
+
+        <section id="hint-box" class="hint-box">
+            <div class="hint-title">💡 HINT</div>
+            <div id="hint-text">Compare the debugging code with the reference code.</div>
+        </section>
+
+        <section id="answer-container" class="answer-area">
+            <div class="selection-status">
+                <span>SELECTED BUG LINES:</span>
+                <strong id="selected-lines-count">0</strong>
+            </div>
+            <div id="selected-lines-display" class="selected-lines-display">No lines selected.</div>
+            <div class="action-buttons">
+                <button id="check-button" class="check-button">✓ CHECK ANSWER</button>
+                <button id="next-button" class="next-button" disabled>→ NEXT LEVEL</button>
+            </div>
+        </section>
+
+        <section class="result-area">
+            <div id="result-message" class="result-message"></div>
+            <div id="explanation" class="explanation"></div>
+        </section>
+
+        <div class="game-controls">
+            <button id="restart-game-button-inline">↻ RESTART</button>
+            <button id="quit-game-button">✕ QUIT TO MENU</button>
+        </div>
+    </div>
+</main>
+
+<div id="options-modal" class="modal hidden">
+    <div class="modal-content">
+        <button id="close-options" class="close-button">✕</button>
+        <h2>⚙ OPTIONS</h2>
+        <div class="option-container">
+            <label class="option-row"><span>Timer</span><select id="timer-option">
+                <option value="45">45 seconds</option>
+                <option value="60" selected>60 seconds</option>
+                <option value="90">90 seconds</option>
+            </select></label>
+            <label class="option-row"><span>Sound</span><input id="sound-option" type="checkbox" checked></label>
+        </div>
+        <button id="close-options-bottom" class="modal-button">CLOSE</button>
+    </div>
+</div>
+
+<div id="about-modal" class="modal hidden">
+    <div class="modal-content">
+        <button id="close-about" class="close-button">✕</button>
+        <h2>ℹ ABOUT BRAINBYTE</h2>
+        <div class="about-content">
+            <h3>BRAINBYTE</h3>
+            <p>A coding challenge game where players identify programming errors and improve their debugging skills.</p>
+            <p>Find the incorrect line, select it, and check your answer.</p>
+            <p>Progress through the available coding levels with increasing difficulty.</p>
+        </div>
+        <button id="close-about-bottom" class="modal-button">CLOSE</button>
+    </div>
+</div>
+
+<div id="how-to-play-modal" class="modal hidden">
+    <div class="modal-content">
+        <button id="close-how-to-play" class="close-button">✕</button>
+        <h2>❓ HOW TO PLAY</h2>
+        <div class="how-to-play-content">
+            <div class="how-step"><strong>1. START</strong><p>Start a new challenge or continue your saved progress.</p></div>
+            <div class="how-step"><strong>2. COMPARE</strong><p>Compare the Reference Code with the Debugging Code.</p></div>
+            <div class="how-step"><strong>3. SELECT THE BUG</strong><p>Click the line or lines that contain the coding error.</p></div>
+            <div class="how-step"><strong>4. CHECK ANSWER</strong><p>Click CHECK ANSWER to submit your selected lines.</p></div>
+            <div class="how-step"><strong>5. NEXT LEVEL</strong><p>If correct, continue to the next level.</p></div>
+            <div class="how-step"><strong>6. LIVES</strong><p>Wrong answers reduce your lives. Lose all lives and the game ends.</p></div>
+        </div>
+        <button id="close-how-to-play-bottom" class="modal-button">CLOSE</button>
+    </div>
+</div>
+
+<div id="pause-modal" class="modal hidden">
+    <div class="modal-content pause-content">
+        <h2>GAME PAUSED</h2>
+        <p>Your coding challenge is currently paused.</p>
+        <div class="pause-buttons">
+            <button id="resume-button">▶ RESUME</button>
+            <button id="restart-game-button">↻ RESTART</button>
+            <button id="pause-quit-button">✕ QUIT TO MENU</button>
+        </div>
+    </div>
+</div>
+
+<div id="game-over-modal" class="modal hidden">
+    <div class="modal-content game-over-content">
+        <h2 id="game-over-title">GAME OVER</h2>
+        <div class="final-score"><span>FINAL SCORE</span><strong id="final-score">0</strong></div>
+        <div class="game-over-buttons">
+            <button id="restart-button">↻ RESTART</button>
+            <button id="game-over-menu-button">☰ MAIN MENU</button>
+        </div>
+    </div>
+</div>
+
+<script src="./Data/question.js"></script>
+<script src="./script.js"></script>
+</body>
+</html>
